@@ -2,9 +2,13 @@ package edu.uoc.epcsd.productcatalog.entities;
 
 import lombok.*;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 
 @Entity
 @ToString
@@ -27,5 +31,8 @@ public class Product extends CatalogElement {
 
     @ManyToOne(optional = false)
     private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Item> items;
 
 }
